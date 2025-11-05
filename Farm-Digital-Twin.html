@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infográfico: Gêmeos Digitais na Agricultura Inteligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .kpi-value {
+            font-size: 3rem;
+            line-height: 1;
+        }
+        .kpi-arrow {
+            font-size: 2rem;
+            line-height: 1;
+        }
+        .flow-arrow-h {
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .flow-arrow-h {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+    <!-- 
+    Source Material Analysis Plan:
+    Narrative & Structure: The infographic tells the story of Digital Twins (DTs), starting with a macro view from the scientometric paper and then detailing the concepts for smart farming from the second paper.
+    1. Scientometric Overview: Presents the exponential growth of DT research in agriculture and the overall market projection.
+    2. Decoding the DT: Explains the core concepts of Digital Model, Digital Shadow, and Digital Twin.
+    3. Typology for Agriculture: Details the six types of DTs based on their lifecycle function.
+    4. System Architecture: Illustrates the control model of a DT in a smart farming context.
+
+    Visualization Choices:
+    - Data Point: Publication Growth in Agriculture. Goal: Change. Chosen Visualization: Chart.js Line Chart. Justification: Best way to show a trend over time.
+    - Data Point: Global Market Projection. Goal: Inform. Chosen Visualization: HTML/CSS Big Number KPI. Justification: Highlights a single, impactful statistic effectively.
+    - Data Point: DT Maturity Levels. Goal: Organize. Chosen Visualization: HTML/CSS Flow Diagram. Justification: Clearly shows the progression and relationship between the three concepts.
+    - Data Point: Six Types of DTs. Goal: Organize. Chosen Visualization: HTML/CSS Grid of Cards. Justification: Presents distinct categories in a structured and easily comparable format.
+    - Data Point: DT Control Model. Goal: Organize. Chosen Visualization: HTML/CSS Flow Diagram. Justification: Illustrates the cyclical and interconnected process of a DT-based control system.
+    All chart selections adhere to the NO SVG/NO MERMAID JS constraint.
+    -->
+    <!-- Color Palette: Energetic & Playful -->
+    <!-- NEITHER Mermaid JS NOR SVG were used anywhere in the output. -->
+    
+    <nav class="sticky top-0 z-10 bg-white/80 backdrop-blur-sm shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center items-center py-3 space-x-4 md:space-x-8 text-sm md:text-base">
+                <a href="#scientometrics" class="font-semibold text-slate-600 hover:text-[#EF476F] transition">1. Panorama</a>
+                <a href="#concepts" class="font-semibold text-slate-600 hover:text-[#FFD166] transition">2. Conceitos</a>
+                <a href="#typology" class="font-semibold text-slate-600 hover:text-[#06D6A0] transition">3. Tipologia</a>
+                <a href="#architecture" class="font-semibold text-slate-600 hover:text-[#118AB2] transition">4. Arquitetura</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center my-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#073B4C] mb-2">A Revolução dos Gêmeos Digitais na Agricultura</h1>
+            <p class="text-lg text-[#118AB2] max-w-3xl mx-auto">Uma investigação visual sobre o crescimento, os conceitos e a arquitetura que definem o futuro da agricultura inteligente.</p>
+        </header>
+
+        <main class="space-y-20">
+
+            <section id="scientometrics" class="scroll-mt-24">
+                <h2 class="text-3xl font-bold text-center text-[#073B4C] mb-4">Panorama da Pesquisa: O Crescimento Exponencial</h2>
+                <p class="max-w-3xl mx-auto text-center text-slate-600 mb-10">A análise cientométrica da literatura revela um aumento dramático no interesse por Gêmeos Digitais, especialmente em setores aplicados como a agricultura. Esta tecnologia não é mais uma promessa teórica, mas um campo de pesquisa consolidado e em rápida expansão.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                    
+                    <div class="bg-white rounded-xl shadow-lg p-6 lg:col-span-3">
+                        <h3 class="font-bold text-xl mb-1 text-[#073B4C]">Crescimento de Publicações na Agricultura</h3>
+                        <p class="text-slate-600 mb-4">O número de artigos de pesquisa sobre Gêmeos Digitais na agricultura cresceu mais de 10 vezes entre 2018 e 2024, indicando uma aceleração massiva no desenvolvimento e interesse acadêmico.</p>
+                        <div class="chart-container mx-auto">
+                            <canvas id="publicationsChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg p-6 lg:col-span-2 flex flex-col justify-center items-center text-center">
+                        <h3 class="font-bold text-xl mb-4 text-[#073B4C]">Projeção de Mercado Global</h3>
+                         <p class="text-slate-600 mb-4">O mercado de Gêmeos Digitais está projetado para um crescimento explosivo, refletindo sua adoção em larga escala pelas indústrias.</p>
+                        <div class="flex items-center justify-center space-x-4">
+                            <div>
+                                <p class="text-slate-500">2021</p>
+                                <p class="font-bold text-[#118AB2] kpi-value">$6.9B</p>
+                            </div>
+                            <div class="text-[#06D6A0] kpi-arrow">→</div>
+                            <div>
+                                <p class="text-slate-500">2027</p>
+                                <p class="font-bold text-[#06D6A0] kpi-value">$73.5B</p>
+                            </div>
+                        </div>
+                        <p class="mt-4 text-slate-600 font-semibold">Taxa de Crescimento Anual de <span class="text-[#EF476F]">60.6%</span></p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="concepts" class="scroll-mt-24">
+                <h2 class="text-3xl font-bold text-center text-[#073B4C] mb-4">Decodificando o Gêmeo Digital: Da Sombra à Realidade</h2>
+                <p class="max-w-3xl mx-auto text-center text-slate-600 mb-10">O termo "Gêmeo Digital" é frequentemente usado, mas sua implementação ocorre em estágios de maturidade. A literatura especializada distingue três níveis principais de integração entre o mundo físico e o digital, cada um com um grau crescente de automação e controle.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-xl shadow-lg p-6 text-center transition hover:shadow-2xl hover:-translate-y-1">
+                        <div class="text-5xl mb-4">🖥️</div>
+                        <h3 class="font-bold text-xl mb-2 text-[#118AB2]">1. Modelo Digital</h3>
+                        <p class="text-slate-600">Uma representação digital estática de um objeto físico. Não há fluxo de dados automático; as atualizações são manuais. É a base para qualquer simulação.</p>
+                        <div class="mt-4 text-sm font-semibold text-[#EF476F]">Fluxo de Dados: NENHUM</div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6 text-center transition hover:shadow-2xl hover:-translate-y-1">
+                        <div class="text-5xl mb-4">🛰️</div>
+                        <h3 class="font-bold text-xl mb-2 text-[#FFD166]">2. Sombra Digital</h3>
+                        <p class="text-slate-600">Existe um fluxo de dados automático e unidirecional: do objeto físico para o digital. Permite o monitoramento em tempo real, mas sem controle reverso.</p>
+                        <div class="mt-4 text-sm font-semibold text-yellow-600">Fluxo de Dados: FÍSICO → DIGITAL</div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6 text-center transition hover:shadow-2xl hover:-translate-y-1">
+                        <div class="text-5xl mb-4">🔄</div>
+                        <h3 class="font-bold text-xl mb-2 text-[#06D6A0]">3. Gêmeo Digital</h3>
+                        <p class="text-slate-600">O nível mais alto de integração. O fluxo de dados é bidirecional e totalmente integrado. O modelo digital pode controlar e alterar o objeto físico.</p>
+                        <div class="mt-4 text-sm font-semibold text-green-600">Fluxo de Dados: FÍSICO ↔ DIGITAL</div>
+                    </div>
+                </div>
+                 <p class="max-w-3xl mx-auto text-center text-slate-500 italic mt-8">Análises de artigos de smart farming mostram que a maioria das implementações atuais são, na verdade, **Sombras Digitais**, destacando que a integração bidirecional completa ainda é um desafio significativo.</p>
+            </section>
+
+            <section id="typology" class="scroll-mt-24">
+                <h2 class="text-3xl font-bold text-center text-[#073B4C] mb-4">Uma Tipologia para Gêmeos Digitais na Agricultura</h2>
+                <p class="max-w-3xl mx-auto text-center text-slate-600 mb-10">Com base no ciclo de vida e nas capacidades de controle, os Gêmeos Digitais podem ser classificados em seis tipos distintos, cada um servindo a um propósito específico no gerenciamento da fazenda inteligente.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-xl shadow-lg p-6"><h3 class="font-bold text-lg text-[#073B4C] flex items-center"><span class="text-2xl mr-2">💡</span>Imaginário</h3><p class="text-slate-600 mt-2">Representa um objeto que ainda não existe fisicamente. Usado para design, simulação de requisitos e planejamento antes da materialização.</p></div>
+                    <div class="bg-white rounded-xl shadow-lg p-6"><h3 class="font-bold text-lg text-[#073B4C] flex items-center"><span class="text-2xl mr-2">🛰️</span>Monitoramento</h3><p class="text-slate-600 mt-2">Espelha o estado atual de um objeto físico em tempo real. É descritivo ("o que acontece") e diagnóstico ("por que acontece").</p></div>
+                    <div class="bg-white rounded-xl shadow-lg p-6"><h3 class="font-bold text-lg text-[#073B4C] flex items-center"><span class="text-2xl mr-2">🔮</span>Preditivo</h3><p class="text-slate-600 mt-2">Projeta estados e comportamentos futuros do objeto físico usando análises preditivas, simulação e machine learning.</p></div>
+                    <div class="bg-white rounded-xl shadow-lg p-6"><h3 class="font-bold text-lg text-[#073B4C] flex items-center"><span class="text-2xl mr-2">📋</span>Prescritivo</h3><p class="text-slate-600 mt-2">Recomenda ações corretivas ou preventivas com base nas previsões. A decisão e execução ainda são humanas.</p></div>
+                    <div class="bg-white rounded-xl shadow-lg p-6"><h3 class="font-bold text-lg text-[#073B4C] flex items-center"><span class="text-2xl mr-2">🤖</span>Autônomo</h3><p class="text-slate-600 mt-2">Opera de forma autônoma, controlando o comportamento do objeto físico sem intervenção humana, fechando o ciclo de controle.</p></div>
+                    <div class="bg-white rounded-xl shadow-lg p-6"><h3 class="font-bold text-lg text-[#073B4C] flex items-center"><span class="text-2xl mr-2">📚</span>Recolecção</h3><p class="text-slate-600 mt-2">Mantém o histórico completo de um objeto físico que não existe mais. Crucial para rastreabilidade, conformidade e aprendizado.</p></div>
+                </div>
+            </section>
+            
+            <section id="architecture" class="scroll-mt-24">
+                <h2 class="text-3xl font-bold text-center text-[#073B4C] mb-4">Arquitetura de Controle de um Gêmeo Digital Agrícola</h2>
+                <p class="max-w-3xl mx-auto text-center text-slate-600 mb-10">A implementação de um Gêmeo Digital na agricultura depende de uma arquitetura de sistema bem definida. O modelo de controle mostra como a informação flui para gerenciar a operação, criando um ciclo de feedback entre o mundo físico e o virtual.</p>
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-5 items-center gap-4 text-center">
+                        <div class="flex flex-col items-center p-2">
+                            <div class="text-4xl mb-2">🌿</div>
+                            <div class="font-bold text-[#073B4C]">1. Objetos Físicos</div>
+                            <p class="text-sm text-slate-600">Lavoura, solo, trator</p>
+                        </div>
+                        <div class="text-2xl text-[#118AB2] flow-arrow-h">→</div>
+                        <div class="text-2xl text-[#118AB2] md:hidden">↓</div>
+                        <div class="flex flex-col items-center p-2">
+                            <div class="text-4xl mb-2">📡</div>
+                            <div class="font-bold text-[#073B4C]">2. Sensores</div>
+                            <p class="text-sm text-slate-600">VANTs, sensores de solo, câmeras coletam dados</p>
+                        </div>
+                        <div class="text-2xl text-[#118AB2] flow-arrow-h">→</div>
+                        <div class="text-2xl text-[#118AB2] md:hidden">↓</div>
+                        <div class="flex flex-col items-center p-2 rounded-lg bg-green-100 border-2 border-green-300">
+                            <div class="text-4xl mb-2">💻</div>
+                            <div class="font-bold text-[#06D6A0]">3. Gêmeo Digital</div>
+                            <p class="text-sm text-slate-600">Dados atualizam o modelo virtual, que simula e prevê</p>
+                        </div>
+                        <div class="text-2xl text-[#118AB2] flow-arrow-h">→</div>
+                        <div class="text-2xl text-[#118AB2] md:hidden">↓</div>
+                        <div class="flex flex-col items-center p-2">
+                            <div class="text-4xl mb-2">🧠</div>
+                            <div class="font-bold text-[#FFD166]">4. Decisão</div>
+                            <p class="text-sm text-slate-600">Agricultor ou IA analisa insights e decide intervenções</p>
+                        </div>
+                        <div class="text-2xl text-[#118AB2] flow-arrow-h">→</div>
+                        <div class="text-2xl text-[#118AB2] md:hidden">↓</div>
+                        <div class="flex flex-col items-center p-2">
+                            <div class="text-4xl mb-2">⚙️</div>
+                            <div class="font-bold text-[#EF476F]">5. Atuadores</div>
+                            <p class="text-sm text-slate-600">Sistemas de irrigação e pulverizadores executam ações</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-16 pt-8 border-t border-slate-300">
+            <p class="text-sm text-slate-500">Infográfico gerado com base nos artigos: "Digital twins in smart farming" por Verdouw et al. (2021) e "Digital twins: A scientometric investigation..." por Kaur & Bhatia (2025).</p>
+        </footer>
+    </div>
+
+    <script>
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const wrapLabel = (label) => {
+            const maxLength = 16;
+            if (typeof label !== 'string' || label.length <= maxLength) return label;
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).trim().length > maxLength && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            });
+            if (currentLine) lines.push(currentLine.trim());
+            return lines;
+        };
+
+        const vibrantPalette = {
+            blueDark: '#073B4C',
+            blue: '#118AB2',
+            green: '#06D6A0',
+            yellow: '#FFD166',
+            red: '#EF476F'
+        };
+
+        const publicationsCtx = document.getElementById('publicationsChart').getContext('2d');
+        new Chart(publicationsCtx, {
+            type: 'line',
+            data: {
+                labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+                datasets: [{
+                    label: 'Publicações sobre DT na Agricultura',
+                    data: [12, 36, 58, 83, 102, 128, 141],
+                    borderColor: vibrantPalette.blue,
+                    backgroundColor: 'rgba(17, 138, 178, 0.2)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 2,
+                    pointBackgroundColor: vibrantPalette.blue,
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Número de Documentos' }
+                    },
+                    x: {
+                         title: { display: true, text: 'Ano' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
